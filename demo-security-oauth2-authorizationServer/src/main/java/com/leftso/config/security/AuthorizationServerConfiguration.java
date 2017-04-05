@@ -55,12 +55,21 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory().withClient("normal-app").authorizedGrantTypes("authorization_code", "implicit")
-				.authorities("ROLE_CLIENT").scopes("read", "write").resourceIds(resourceId)
-				.accessTokenValiditySeconds(accessTokenValiditySeconds).and().withClient("trusted-app")
-				.authorizedGrantTypes("client_credentials", "password").authorities("ROLE_TRUSTED_CLIENT")
-				.scopes("read", "write").resourceIds(resourceId).accessTokenValiditySeconds(accessTokenValiditySeconds)
-				.secret("secret");
+		clients.inMemory()
+		.withClient("normal-app")
+			.authorizedGrantTypes("authorization_code", "implicit")
+			.authorities("ROLE_CLIENT")
+			.scopes("read", "write")
+			.resourceIds(resourceId)
+			.accessTokenValiditySeconds(accessTokenValiditySeconds)
+		.and()
+			.withClient("trusted-app")
+			.authorizedGrantTypes("client_credentials", "password")
+			.authorities("ROLE_TRUSTED_CLIENT")
+			.scopes("read", "write")
+			.resourceIds(resourceId)
+			.accessTokenValiditySeconds(accessTokenValiditySeconds)
+			.secret("secret");
 	}
 
 	/**
